@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Truly Sorry, My Love</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fce4ec, #f3e5f5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        h1 {
+            color: #ff4081;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        p {
+            color: #424242;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+        
+        .hearts {
+            font-size: 24px;
+            color: #ff4081;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .emoji {
+            font-size: 48px;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .background-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 105, 180, 0.1);
+        }
+        
+        #teddy {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: -50px;
+            right: -30px;
+            transform: rotate(15deg);
+        }
+        
+        .button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .button:hover {
+            background-color: #e91e63;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="background-shapes"></div>
+        <h1>I'm Truly Sorry, My Love</h1>
+        <div class="emoji">
+            <span class="floating" style="animation-delay: 0s;">🧸</span>
+            <span class="floating" style="animation-delay: 0.2s;">🌹</span>
+            <span class="floating" style="animation-delay: 0.4s;">🌻</span>
+        </div>
+        <p>My words were thoughtless and hurtful. You deserve nothing but love and kindness, and I failed to provide that. Please forgive me.</p>
+        <div class="hearts">
+            <span class="floating" style="animation-delay: 0s;">❤️</span>
+            <span class="floating" style="animation-delay: 0.3s;">💖</span>
+            <span class="floating" style="animation-delay: 0.6s;">💕</span>
+        </div>
+        <p>I promise to be more considerate and to always cherish the beautiful bond we share.</p>
+        <div class="emoji">
+            <span class="floating" style="animation-delay: 0.1s;">🌷</span>
+            <span class="floating" style="animation-delay: 0.3s;">🐻</span>
+            <span class="floating" style="animation-delay: 0.5s;">🌺</span>
+        </div>
+        <p>You mean everything to me. I love you endlessly.</p>
+        <button class="button">Forgive Me?</button>
+        <img id="teddy" src="/api/placeholder/100/100" alt="Cute Teddy Bear">
+    </div>
+
+    <script>
+        // Create floating background shapes
+        const shapes = 15;
+        const backgroundShapes = document.querySelector('.background-shapes');
+        
+        for (let i = 0; i < shapes; i++) {
+            const shape = document.createElement('div');
+            shape.classList.add('shape');
+            shape.style.width = `${Math.random() * 50 + 10}px`;
+            shape.style.height = shape.style.width;
+            shape.style.left = `${Math.random() * 100}%`;
+            shape.style.top = `${Math.random() * 100}%`;
+            shape.style.animationDuration = `${Math.random() * 5 + 5}s`;
+            shape.style.animationDelay = `${Math.random() * 2}s`;
+            backgroundShapes.appendChild(shape);
+        }
+        
+        // GSAP Animations
+        gsap.from(".card", {duration: 1, y: 50, opacity: 0, ease: "power3.out"});
+        gsap.from("h1", {duration: 1, y: 20, opacity: 0, delay: 0.5, ease: "power3.out"});
+        gsap.from("p", {duration: 1, y: 20, opacity: 0, delay: 0.8, stagger: 0.2, ease: "power3.out"});
+        gsap.from(".emoji, .hearts", {duration: 1, scale: 0, opacity: 0, delay: 1, stagger: 0.2, ease: "back.out(1.7)"});
+        gsap.from(".button", {duration: 1, scale: 0, opacity: 0, delay: 1.5, ease: "elastic.out(1, 0.3)"});
+        gsap.to("#teddy", {duration: 2, rotation: -15, yoyo: true, repeat: -1, ease: "power1.inOut"});
+    </script>
+</body>
+</html>
